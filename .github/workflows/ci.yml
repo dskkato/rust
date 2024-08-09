@@ -22,11 +22,9 @@ jobs:
           - windows-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions-rs/toolchain@v1
+      - uses: dtolnay/rust-toolchain@stable
         with:
-          profile: minimal
           toolchain: stable
-          override: true
           components: rustfmt
       - name: Setup Python # Set Python version
         uses: actions/setup-python@v4
