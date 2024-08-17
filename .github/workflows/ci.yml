@@ -18,13 +18,16 @@ jobs:
       matrix:
         os:
           - ubuntu-latest
+          # TODO(someone): re-enable the following platforms
           # - macos-latest
           # - windows-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions-rs/toolchain@v1
         with:
+          profile: minimal
           toolchain: stable
+          override: true
           components: rustfmt
       - name: Setup Python # Set Python version
         uses: actions/setup-python@v4
@@ -50,6 +53,7 @@ jobs:
       - name: Execute example check
         run: ./test-all example-cmd
         shell: bash
+      # TODO(someone): re-enable the following checks. In local, it works fine.
       # - name: Execute doc check
       #   run: ./test-all doc-cmd
       #   shell: bash
