@@ -24,8 +24,8 @@ const REPOSITORY: &str = "https://github.com/tensorflow/tensorflow.git";
 const FRAMEWORK_TARGET: &str = "tensorflow:libtensorflow_framework";
 const TARGET: &str = "tensorflow:libtensorflow";
 // `VERSION` and `TAG` are separate because the tag is not always `'v' + VERSION`.
-const VERSION: &str = "2.13.0";
-const TAG: &str = "v2.13.0";
+const VERSION: &str = "2.17.0";
+const TAG: &str = "v2.17.0";
 const MIN_BAZEL: &str = "3.7.2";
 
 macro_rules! get(($name:expr) => (ok!(env::var($name))));
@@ -198,11 +198,11 @@ fn install_prebuilt() {
     let windows = target_os() == "windows";
     let ext = if windows { ".zip" } else { ".tar.gz" };
     let binary_url = format!(
-        "https://storage.googleapis.com/tensorflow/libtensorflow/libtensorflow-{}-{}-{}-{}{}",
+        "https://storage.googleapis.com/tensorflow/versions/{}/libtensorflow-{}-{}-{}{}",
+        VERSION,
         proc_type,
         os,
         target_arch(),
-        VERSION,
         ext
     );
     log_var!(binary_url);
@@ -245,8 +245,8 @@ fn install_prebuilt() {
     let framework_library_file = format!("{}{}{}", dll_prefix(), FRAMEWORK_LIBRARY, dll_suffix());
     let library_file = format!("{}{}{}", dll_prefix(), LIBRARY, dll_suffix());
 
-    let framework_library_full_path = lib_dir.join(&framework_library_file);
-    let library_full_path = lib_dir.join(&library_file);
+    let framework_library_full_path = lib_dir.join(framework_library_file);
+    let library_full_path = lib_dir.join(library_file);
 
     let download_required =
         (!windows && !framework_library_full_path.exists()) || !library_full_path.exists();
