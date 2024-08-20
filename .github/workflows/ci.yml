@@ -53,10 +53,9 @@ jobs:
       - name: Execute example check
         run: ./test-all example-cmd
         shell: bash
-      # TODO(someone): re-enable the following checks. In local, it works fine.
-      # - name: Execute doc check
-      #   run: ./test-all doc-cmd
-      #   shell: bash
+      - name: Execute doc check
+        run: ./test-all doc-cmd
+        shell: bash
       - name: Execute attributes check
         run: ./test-all attributes-check
         shell: bash
